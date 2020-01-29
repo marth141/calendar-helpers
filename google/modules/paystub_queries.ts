@@ -1,4 +1,4 @@
-class PaystubReminder {
+class PaystubQueries {
     isTodayGoodForPaystubs: boolean;
     isNextMonths20thGoodForPaystubs: boolean;
     isThisMonths20thGoodForPaystubs: boolean;
