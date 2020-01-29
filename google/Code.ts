@@ -6,10 +6,10 @@ function myFunction() {
     }
 
     if (new PaystubReminder().isTodayGoodForPaystubs) {
-        CalendarApp.getDefaultCalendar().createAllDayEvent("Send Paystubs", new Date(), new Date())
+        new PaystubActions().createCalendarEvent();
     }
-    Logger.log("isThisMonths20thGoodForPaystubs?\t", new PaystubReminder().isThisMonths20thGoodForPaystubs)
-    Logger.log("isNextMonths20thGoodForPaystubs?\t", new PaystubReminder().isNextMonths20thGoodForPaystubs)
-    Logger.log("isTodayGoodForPaystubs?\t", new PaystubReminder().isTodayGoodForPaystubs)
+    Logger.log("isThisMonths20thGoodForPaystubs?\t" + new PaystubReminder().isThisMonths20thGoodForPaystubs)
+    Logger.log("isNextMonths20thGoodForPaystubs?\t" + new PaystubReminder().isNextMonths20thGoodForPaystubs)
+    Logger.log("isTodayGoodForPaystubs?\t" + new PaystubReminder().isTodayGoodForPaystubs)
     return;
 }
