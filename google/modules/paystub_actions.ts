@@ -3,7 +3,7 @@ class PaystubActions {
         
     }
 
-    createCalendarEvent() {
+    public createCalendarEvent() {
         CalendarApp.getDefaultCalendar().createAllDayEvent("Send Paystubs", new Date(), new Date())
     }
 }

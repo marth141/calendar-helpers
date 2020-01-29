@@ -4,88 +4,88 @@ class PaystubQueries {
     isThisMonths20thGoodForPaystubs: boolean;
 
     constructor() {
-        this.isTodayGoodForPaystubs = this.checkIsTodayGoodForPaystubs()
-        this.isNextMonths20thGoodForPaystubs = this.checkIsNextMonths20thGoodForPaystubs()
-        this.isThisMonths20thGoodForPaystubs = this.checkIsThisMonths20thGoodForPaystubs()
+        this.isTodayGoodForPaystubs = this.queryIsTodayGoodForPaystubs()
+        this.isNextMonths20thGoodForPaystubs = this.queryIsNextMonths20thGoodForPaystubs()
+        this.isThisMonths20thGoodForPaystubs = this.queryIsThisMonths20thGoodForPaystubs()
     }
 
-    getTodaysEvents() {
+    public getTodaysEvents() {
         return CalendarApp.getDefaultCalendar().getEventsForDay(new Date());
     }
 
-    private checkIsThisMonths20thGoodForPaystubs() {
-        return this.months20thIsBeforeOrOnThursday();
+    private queryIsThisMonths20thGoodForPaystubs() {
+        return this.getBoolThisMonths20thIsBeforeOrOnThursday();
     }
 
-    private checkIsNextMonths20thGoodForPaystubs() {
-        return this.nextMonths20thIsBeforeOrOnThursday();
+    private queryIsNextMonths20thGoodForPaystubs() {
+        return this.getBoolNextMonths20thIsBeforeOrOnThursday();
     }
 
-    private checkIsTodayGoodForPaystubs() {
-        return this.todayIsBeforeOrOnThe20th() && this.todayIsBeforeOrOnThursday() && this.todayIsWithinTheWeekBefore20th();
+    private queryIsTodayGoodForPaystubs() {
+        return this.getBoolTodayIsBeforeOrOnThe20th() && this.getBoolTodayIsBeforeOrOnThursday() && this.getBoolTodayIsWithinTheWeekBefore20th();
     }
 
-    private todayIsWithinTheWeekBefore20th() {
-        return this.todayIsBeforeThe20th() && this.todayIsOneWeekBeforeThe20th();
+    private getBoolTodayIsWithinTheWeekBefore20th() {
+        return this.getBoolTodayIsBeforeThe20th() && this.getBoolTodayIsOneWeekBeforeThe20th();
     }
 
-    private todayIsOneWeekBeforeThe20th() {
-        return this.getTodaysDate().getDate() >= this.getOneWeekBeforeThe20th();
+    private getBoolTodayIsOneWeekBeforeThe20th() {
+        return this.getDateTodaysDate().getDate() >= this.getNumOneWeekBeforeThe20th();
     }
 
-    private todayIsBeforeThe20th() {
-        return this.getTodaysDate().getDate() <= this.getThe20th()
+    private getBoolTodayIsBeforeThe20th() {
+        return this.getDateTodaysDate().getDate() <= this.getNumThe20th()
     }
 
-    private getOneWeekBeforeThe20th() {
-        return this.getThe20th() - this.getOneWeek()
+    private getBoolTodayIsBeforeOrOnThursday() {
+        return this.getDateTodaysDate().getDay() <= this.getNumThursday();
     }
 
-    private todayIsBeforeOrOnThursday() {
-        return this.getTodaysDate().getDay() <= this.getThursday();
+    private getBoolTodayIsBeforeOrOnThe20th() {
+        return this.getDateTodaysDate().getDate() <= this.getNumThe20th();
     }
 
-    private todayIsBeforeOrOnThe20th() {
-        return this.getTodaysDate().getDate() <= this.getThe20th();
+    private getBoolThisMonths20thIsBeforeOrOnThursday() {
+        return this.getDateThisMonths20th().getDay() <= this.getNumThursday();
     }
 
-    private months20thIsBeforeOrOnThursday() {
-        return this.getThisMonths20th().getDay() <= this.getThursday();
+    private getBoolNextMonths20thIsBeforeOrOnThursday() {
+        return this.getDateNextMonths20th().getDay() <= this.getNumThursday();
     }
 
-    private nextMonths20thIsBeforeOrOnThursday() {
-        return this.getNextMonths20th().getDay() <= this.getThursday();
+    private getDateNextMonths20th() {
+        return new Date(this.getDateThisMonths20th().setMonth(this.getNumNextMonth()));
     }
 
-    private getNextMonths20th() {
-        return new Date(this.getThisMonths20th().setMonth(this.getNextMonth()));
+    private getNumNextMonth() {
+        return this.getNumThisMonth() + 1;
     }
 
-    private getNextMonth() {
-        return this.getThisMonth() + 1;
+    private getNumThisMonth() {
+        return this.getDateTodaysDate().getMonth();
     }
 
-    private getThisMonth() {
-        return this.getTodaysDate().getMonth();
+    private getDateThisMonths20th() {
+        return new Date(this.getDateTodaysDate().setDate(this.getNumThe20th()));
     }
 
-    private getThisMonths20th() {
-        return new Date(this.getTodaysDate().setDate(this.getThe20th()));
+    private getNumOneWeekBeforeThe20th() {
+        return this.getNumThe20th() - this.getNumOneWeek()
     }
 
-    private getThursday() {
+    private getDateTodaysDate() {
+        return new Date();
+    }
+
+    private getNumThursday() {
         return 4;
     }
 
-    private getThe20th() {
+    private getNumThe20th() {
         return 20;
     }
 
-    private getOneWeek() {
+    private getNumOneWeek() {
         return 7;
-    }
-
-    private getTodaysDate() {
-        return new Date();
     }
 }
