@@ -1,17 +1,27 @@
 class PaystubReminder {
+    isTodayGoodForPaystubs: boolean;
+    isNextMonths20thGoodForPaystubs: boolean;
+    isThisMonths20thGoodForPaystubs: boolean;
+
+    constructor() {
+        this.isTodayGoodForPaystubs = this.checkIsTodayGoodForPaystubs()
+        this.isNextMonths20thGoodForPaystubs = this.checkIsNextMonths20thGoodForPaystubs()
+        this.isThisMonths20thGoodForPaystubs = this.checkIsThisMonths20thGoodForPaystubs()
+    }
+
     getTodaysEvents() {
         return CalendarApp.getDefaultCalendar().getEventsForDay(new Date());
     }
 
-    checkIsThisMonths20thGoodForPaystubs() {
+    private checkIsThisMonths20thGoodForPaystubs() {
         return this.months20thIsBeforeOrOnThursday();
     }
 
-    checkIsNextMonths20thGoodForPaystubs() {
+    private checkIsNextMonths20thGoodForPaystubs() {
         return this.nextMonths20thIsBeforeOrOnThursday();
     }
 
-    checkIsTodayGoodForPaystubs() {
+    private checkIsTodayGoodForPaystubs() {
         return this.todayIsBeforeOrOnThe20th() && this.todayIsBeforeOrOnThursday() && this.todayIsWithinTheWeekBefore20th();
     }
 
